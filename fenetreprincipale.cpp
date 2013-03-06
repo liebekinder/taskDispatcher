@@ -41,6 +41,7 @@ void FenetrePrincipale::setClientGUI()
     clientContener = new QWidget();
     cName = new QLabel("client!   "+QString::number(c->getPort()),clientContener);
     this->setCentralWidget(clientContener);
+    c->runClient();
 }
 
 void FenetrePrincipale::setServerGUI()

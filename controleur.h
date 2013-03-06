@@ -16,9 +16,6 @@ public:
     enum Mode{SERVER,
          CLIENT};
 
-    //fields
-    static QList<int> * listeClient;
-
 
     //get/set
     int getPort();
@@ -33,13 +30,10 @@ private:
     int port;
     Mode mode;
 
-    static const int TAILLE_MAX_NOM = 256;
-    static const int NB_CLIENT = 16;
-    static const int BUFFER_MESSAGE_SIZE = 32;
 
     //methods
-    static bool slotDisponible();
-    static void * connexionPrincipale(void* sock2);
+    //bool slotDisponible();
+    //void * connexionPrincipale(void* sock2);
 
 
 signals:

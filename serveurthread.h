@@ -19,6 +19,10 @@ private:
     int new_sock;
     Serveur * server;
 
+    //methodes
+    void recevoirFile(QString path, int size);
+    int tailleFichier();
+
 signals:
     void finished();
     void error(QString err);

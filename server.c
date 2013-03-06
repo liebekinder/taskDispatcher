@@ -114,7 +114,7 @@ int main(int argc, char **argv)
    }
    sysout("succes!",DEBUG);
    
-	//----------------------------------------------------------------------//
+	//ç------------------------------------------------------------------//
    
    //allocation du tableau des clients, thread et aptitude
 	listeClient = (int *) malloc(NB_CLIENT*sizeof(int));
