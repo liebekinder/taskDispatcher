@@ -1,0 +1,47 @@
+
+
+
+
+
+
+       bcopy((char*)ptr_hote->h_addr, (char*)&adresse_locale.sin_addr, ptr_hote->h_length);
+       adresse_locale.sin_family = AF_INET;
+
+       adresse_locale.sin_port = htons(port);
+
+       qDebug()<<"numéro de port pour la co serveur:" + QString::number(ntohs(adresse_locale.sin_port));
+
+       if((socket_descriptor = socket(AF_INET, SOCK_STREAM, 0)) < 0){
+               perror("impossible de creer la socket de co avec client");
+               exit(1);
+       }
+
+       if((connect(socket_descriptor, (sockaddr*)(&adresse_locale), (socklen_t)(sizeof(adresse_locale)))) < 0){
+               perror("impossible de lier la socket avec client");
+               exit(1);
+       }
+
+       qDebug()<<"...connexion ok!";
+
+       //Attente de la réponse serveur
+       if((longueur = read(socket_descriptor, bufMessage, sizeof(bufMessage) -1)) > 0){
+               //
+               if(strcmp(bufMessage,"CO-OK") == 0){
+                            //connexion acceptée
+                            qDebug()<<"connexion acceptée";
+               }
+               else if(strcmp(bufMessage,"CO-NO") == 0){
+                            //connexion refusée
+                            qDebug()<<"connexion refusée";
+               }
+               else{
+                       qDebug()<<"hmm.. comparaison foireuse";
+               }
+       }
+
+       qDebug()<<"fin connexion";
+
+       close(socket_descriptor);
+
+
+       qDebug()<<"fin co";
