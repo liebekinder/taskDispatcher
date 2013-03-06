@@ -14,7 +14,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         fenetreprincipale.cpp \
-    controleur.cpp
+    controleur.cpp \
+    serveur.cpp \
+    client.cpp \
+    serveurthread.cpp
 
 HEADERS  += fenetreprincipale.h \
-    controleur.h
+    controleur.h \
+    serveur.h \
+    client.h \
+    Parametres.h \
+    serveurthread.h
+
+OTHER_FILES += \
+    junk.txt
