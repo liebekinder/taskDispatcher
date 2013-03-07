@@ -34,6 +34,8 @@ public:
         QWidget * serverContener;
         QLabel * sName;
 
+        QHBoxLayout * serverContenerLayout;
+
     //methods
 
         void setClientGUI();

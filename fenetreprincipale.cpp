@@ -41,13 +41,15 @@ void FenetrePrincipale::setClientGUI()
     clientContener = new QWidget();
     cName = new QLabel("client!   "+QString::number(c->getPort()),clientContener);
     this->setCentralWidget(clientContener);
-    c->runClient();
 }
 
 void FenetrePrincipale::setServerGUI()
 {
-    serverContener = new QWidget();
-    sName = new QLabel("server!  "+QString::number(c->getPort()),serverContener);
+    serverContenerLayout = new QHBoxLayout;
+        serverContener = new QWidget();
+        sName = new QLabel("The server is started on port:  "+QString::number(c->getPort()));
+        //serverContenerLayout->align
+        serverContenerLayout->addWidget(sName);
+    serverContener->setLayout(serverContenerLayout);
     this->setCentralWidget(serverContener);
-    c->runServer();
 }

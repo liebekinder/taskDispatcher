@@ -1,3 +1,5 @@
+#include <QThread>
+
 #include "controleur.h"
 #include "fenetreprincipale.h"
 #include "Parametres.h"
@@ -21,14 +23,29 @@ void Controleur::runClient()
 {
     //Method console de la gestion du client
     Client * cli = new Client(this);
-    cli->runClient();
+
+    QThread * qth = new QThread;
+
+    cli->moveToThread(qth);
+
+    //gestion de la fonction à accrocher.
+    connect(qth,SIGNAL(started()), cli, SLOT(process()));
+
+    qth->start();
 }
 
 void Controleur::runServer()
 {
     //Methode console de la gestion du serveur
     Serveur * s = new Serveur(this);
-    s->runServer();
+
+    QThread * qth = new QThread;
+
+    s->moveToThread(qth);
+
+    //gestion de la fonction à accrocher.
+    connect(qth,SIGNAL(started()), s, SLOT(process()));
+    qth->start();
 }
 
 void Controleur::client()
@@ -38,6 +55,7 @@ void Controleur::client()
 
     //reglage ok, on affiche
     fenetre->setClientGUI();
+    runClient();
 }
 
 void Controleur::server()
@@ -47,4 +65,10 @@ void Controleur::server()
 
     //reglage ok, on affiche
     fenetre->setServerGUI();
+    runServer();
+}
+
+void Controleur::serverGetTelechargement()
+{
+    //maj graphique
 }

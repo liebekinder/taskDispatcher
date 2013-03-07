@@ -42,6 +42,10 @@ void ServeurThread::process()
         int tailleFic;
         if((tailleFic = tailleFichier()) > 0){
             qDebug()<<"On attends le fichier de taille "+QString::number(tailleFic);
+
+            //il faut déterminer quel est le nom du fichier en local.
+            //puisqu'il s'agit d'un traitement avec renvoi, le nom importe peu, mais on lui ajoute
+            //une chaine aléatoire à la fin afin d'éviter les doublons
             recevoirFile("lol.txt",tailleFic);
 
             /*QString chemin = QFileDialog::getSaveFileName(0,"fichier à envoyer",QString(),"fichier (*.*)");

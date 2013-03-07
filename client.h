@@ -26,6 +26,7 @@ private:
 signals:
     
 public slots:
+    void process();
     
 };
 

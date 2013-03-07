@@ -41,6 +41,7 @@ signals:
 public slots:
     void client();
     void server();
+    void serverGetTelechargement();
     
 };
 

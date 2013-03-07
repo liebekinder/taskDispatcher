@@ -105,19 +105,19 @@ void Serveur::runServer()
         listeThreadClient->push_back((QObject*)(new QThread));
         listeThreadClient->push_back((QObject*)(new ServeurThread(this, nouv_socket_descriptor)));
 
-        //MODIFICATIONS LOURDES
-
         ((ServeurThread*)(listeThreadClient->at(cptList+1)))->moveToThread((QThread*)(listeThreadClient->at(cptList)));
+        //gestion erreur
         connect((ServeurThread*)(listeThreadClient->at(cptList+1)),SIGNAL(error(QString)), this, SLOT(threadError(QString)));
+        //gestion de la fonction à accrocher.
         connect((QThread*)(listeThreadClient->at(cptList)),SIGNAL(started()), (ServeurThread*)(listeThreadClient->at(cptList+1)), SLOT(process()));
+        //gestion de la fin du thread
         connect((ServeurThread*)(listeThreadClient->at(cptList+1)),SIGNAL(finished()), (QThread*)(listeThreadClient->at(cptList)), SLOT(quit()));
         connect((ServeurThread*)(listeThreadClient->at(cptList+1)),SIGNAL(finished()), (ServeurThread*)(listeThreadClient->at(cptList+1)), SLOT(deleteLater()));
         connect((QThread*)(listeThreadClient->at(cptList)),SIGNAL(finished()), (QThread*)(listeThreadClient->at(cptList)), SLOT(deleteLater()));
+
         ((QThread*)(listeThreadClient->at(cptList)))->start();
         cptList += 2;
 
-
-        //FIN GROSSES MODIFICATIONS
     }
 
 }
@@ -135,4 +135,9 @@ void Serveur::manageIncomingCo(){
     //all allocation must be here
     qDebug()<<"thread? :)";
     emit finished();
+}
+
+void Serveur::process()
+{
+    runServer();
 }

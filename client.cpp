@@ -127,25 +127,6 @@ void Client::envoieFile(QString path){
                 //f.seek(f.pos() + byteWritten);
             }
         }
-       /* while(pos<10000){
-            qDebug()<<"pos :"+QString::number(pos);
-            //on parcourt le fichier
-            f.seek(pos);
-            qDebug()<<"1";
-
-            //byteRead = f.read(data,BUFFER_FRAME);
-            QByteArray lal = f.read(BUFFER_FRAME);
-            data = lal.data();
-            qDebug()<<"2";
-            if(lal.size() == BUFFER_FRAME){
-                //la lecture est réussie
-                pos += byteRead;
-
-                //envoie de la trame
-                envoiTrame(data);
-            }
-            qDebug()<<lal;
-        }*/
     }
     else{
         qDebug()<<"impossible d'ouvrir le fichier";
@@ -182,4 +163,9 @@ void Client::waitingForValidation(){
         qDebug()<<bufMessage;
     }
 
+}
+
+void Client::process()
+{
+    runClient();
 }

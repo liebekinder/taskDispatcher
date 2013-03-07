@@ -29,6 +29,7 @@ signals:
 public slots:
     void threadError(QString err);
     void manageIncomingCo();
+    void process();
 };
 
 #endif // SERVEUR_H
